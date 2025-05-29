@@ -31,6 +31,7 @@ def copy_template_and_update_yaml(template_path, software_list, args, filename="
     yaml_data['output']['outputdir'] = str(outpath)
     yaml_data['input']['inputdir'] = input_path
     yaml_data['reference']['genome'] = reference
+    yaml_data['mode'] = args.end_mode
     
     # 检测并更新每个软件的路径和版本
     for software in software_list:
@@ -58,7 +59,7 @@ def get_parser() -> argparse.ArgumentParser:
         "-r", "--reference",type=Path, help="File path of reference fasta", default="" ,required=False
     )
     parser.add_argument(
-        "-m", "--end-mod", help="Sequencing layout,Single-end(SE) or Paired-end(PE)",  type=str, default='PE', required=False
+        "-m", "--end-mode", help="Sequencing layout, single or paired",  type=str, default='paired', required=False
     )
     parser.add_argument(
         "-o", "--out", type=Path, help="Result path", default="./", required=False
